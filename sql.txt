@@ -1,0 +1,17 @@
+1)
+SELECT c.login,
+       COUNT(ord.track) AS "Количество заказов"
+FROM "Orders" AS ord
+JOIN "Couriers" AS c ON ord."courierId" = c.id
+WHERE ord."inDelivery" = true
+GROUP BY c.login;
+
+2)
+SELECT track, 
+       CASE
+           WHEN finished = true THEN 2
+           WHEN cancelled = true THEN -1
+           WHEN "inDelivery" = true THEN 1
+           ELSE 0
+       END AS "Статус"
+FROM "Orders";
